@@ -95,7 +95,7 @@ export const SignupFormDemo = () => {
                     type="submit"
                     disabled={loading}
                 >
-                    {loading ? "Loading..." : "Sign up →;"}
+                    {loading ? "Loading..." : "Sign up →"}
                     <BottomGradient />
                 </button>
 

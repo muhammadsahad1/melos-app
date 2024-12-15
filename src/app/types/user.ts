@@ -1,11 +1,11 @@
 export interface ILogin {
-    type: "login"
+    type?: "login"
     email: string,
     password: string
 }
 
 export interface IRegister {
-    type: "register"
+    type?: "register"
     username: string,
     email: string,
     password: string
