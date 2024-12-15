@@ -1,0 +1,122 @@
+
+### *Person 1: Playlist and Library Modules*
+- *Frontend*:  
+  - src/app/(routes)/playlist/  
+  - src/app/(routes)/library/  
+  - src/app/components/playlist/  
+  - src/app/components/ui/Card.tsx (shared for playlist UI)  
+  - src/app/hooks/usePlaylist.ts  
+
+- *Backend*:  
+  - src/app/api/playlists/route.ts  
+
+---
+
+### *Person 2: Home and Search Modules*
+- *Frontend*:  
+  - src/app/(routes)/home/  
+  - src/app/(routes)/search/  
+  - src/app/components/ui/Button.tsx and Input.tsx (shared for search UI)  
+  - src/app/components/track/  
+  - src/app/hooks/useAudioPlayer.ts  
+
+- *Backend*:  
+  - src/app/api/search/route.ts  
+  - src/app/api/tracks/route.ts  
+
+---
+
+### *Shared Components & Contexts*
+- *Person 1 and Person 2 can collaborate on*:  
+  - src/app/components/layout/  
+  - src/app/contexts/ (AudioPlayerContext and AuthContext)  
+  - src/app/styles/  
+
+---
+
+### *Shared Utility Work*
+Both should collaborate on:  
+- src/app/lib/  
+- src/app/types/  
+
+This way, each person works on a feature that involves both frontend and backend, ensuring an equal and balanced workload.
+
+
+
+
+music-player/
+│
+├── src/
+│   ├── app/
+│   │   ├── (routes)/
+│   │   │   ├── home/
+│   │   │   │   └── page.tsx
+│   │   │   ├── library/
+│   │   │   │   └── page.tsx
+│   │   │   ├── playlist/
+│   │   │   │   ├── [playlistId]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── search/
+│   │   │   │   └── page.tsx
+│   │   │   └── layout.tsx
+│   │   │
+│   │   ├── api/
+│   │   │   ├── tracks/
+│   │   │   │   └── route.ts
+│   │   │   ├── playlists/
+│   │   │   │   └── route.ts
+│   │   │   └── search/
+│   │   │       └── route.ts
+│   │   │
+│   │   ├── components/
+│   │   │   ├── layout/
+│   │   │   │   ├── Sidebar.tsx
+│   │   │   │   ├── Header.tsx
+│   │   │   │   └── MusicPlayer.tsx
+│   │   │   ├── ui/
+│   │   │   │   ├── Button.tsx
+│   │   │   │   ├── Input.tsx
+│   │   │   │   └── Card.tsx
+│   │   │   ├── playlist/
+│   │   │   │   ├── PlaylistItem.tsx
+│   │   │   │   └── PlaylistForm.tsx
+│   │   │   └── track/
+│   │   │       ├── TrackItem.tsx
+│   │   │       └── TrackDetails.tsx
+│   │   │
+│   │   ├── contexts/
+│   │   │   ├── AudioPlayerContext.tsx
+│   │   │   └── AuthContext.tsx
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useAudioPlayer.ts
+│   │   │   ├── usePlaylist.ts
+│   │   │   └── useAuth.ts
+│   │   │
+│   │   ├── lib/
+│   │   │   ├── api.ts
+│   │   │   ├── utils.ts
+│   │   │   └── spotify.ts
+│   │   │
+│   │   ├── styles/
+│   │   │   ├── globals.css
+│   │   │   └── theme.ts
+│   │   │
+│   │   └── types/
+│   │       ├── track.ts
+│   │       ├── playlist.ts
+│   │       └── user.ts
+│   │
+│   ├── middleware.ts
+│   └── next.config.js
+│
+├── public/
+│   ├── images/
+│   └── icons/
+│
+├── prisma/
+│   └── schema.prisma
+│
+├── package.json
+└── README.md
