@@ -2,21 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  @apply bg-black text-white; /* Apply bg-black for background and text-white for foreground */
+  font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Optional: Add dark mode support if needed */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+ /* You can customize this if you want a different dark mode theme */
   }
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */

@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "@prisma/client": "^6.0.1",
+    "@radix-ui/react-label": "^2.1.1",
+    "@tabler/icons-react": "^3.24.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
     "cookie": "^1.0.2",
+    "framer-motion": "^11.14.4",
     "i": "^0.3.7",
     "jsonwebtoken": "^9.0.2",
     "next": "15.1.0",
@@ -20,7 +24,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.1",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
