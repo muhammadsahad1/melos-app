@@ -25,6 +25,7 @@ const page = () => {
             } else {
                 toast.error(response.data.error)
             }
+            
             setLoading(false)
 
         } catch (error) {
