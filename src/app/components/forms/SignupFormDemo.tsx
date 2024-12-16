@@ -10,21 +10,21 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/api";
 import { IRegister } from "@/app/types/user";
 import toast from "react-hot-toast";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export const SignupFormDemo = () => {
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<IRegister>();
-    // const router = useRouter();
+    const router = useRouter();
 
     const onSubmit: SubmitHandler<IRegister> = async (data) => {
         try {
             setLoading(true);
             const response = await api.post("/auth", { type: "register", username: data.username, email: data.email, password: data.password });
-
+            console.log("response after register => ", response)
             if (response.data.message === "Registration successful") {
                 toast.success("Registration successful!");
-                // router.push("/home");  // Redirect to home after successful registration
+                router.push("/home");
             } else {
                 toast.error(response.data.error);
             }
@@ -66,9 +66,9 @@ export const SignupFormDemo = () => {
                         id="email"
                         placeholder="useremail@gmail.com"
                         type="email"
-                        {...register("email", { 
-                            required: "Email is required", 
-                            pattern: { value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, message: "Invalid email address" } 
+                        {...register("email", {
+                            required: "Email is required",
+                            pattern: { value: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/, message: "Invalid email address" }
                         })}
                     />
                     {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
@@ -81,9 +81,9 @@ export const SignupFormDemo = () => {
                         id="password"
                         placeholder="••••••••"
                         type="password"
-                        {...register("password", { 
-                            required: "Password is required", 
-                            minLength: { value: 6, message: "Password must be at least 6 characters" } 
+                        {...register("password", {
+                            required: "Password is required",
+                            minLength: { value: 6, message: "Password must be at least 6 characters" }
                         })}
                     />
                     {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}

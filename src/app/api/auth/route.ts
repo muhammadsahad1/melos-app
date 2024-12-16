@@ -1,18 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 import jwt from 'jsonwebtoken'
-import cookie from 'cookie'
+import { serialize } from 'cookie'
+
 
 // handler 
 export async function POST(request: NextRequest) {
     try {
 
         const { type, email, username, password } = await request.json()
-
+        console.log("Data =>", type, email, username, password)
+        // corresponding type we are providing function
         if (type === "login") {
             return await login(email, password)
         } else if (type === "register") {
+            console.log("keri")
             return await register(username, email, password)
         } else {
             return NextResponse.json({ error: "Invalid request type" }, { status: 400 });
@@ -26,7 +29,6 @@ export async function POST(request: NextRequest) {
 // login user
 const login = async (email: string, password: string) => {
     try {
-
 
         const user = await prisma.user.findUnique({ where: { email } })
 
@@ -53,8 +55,8 @@ const login = async (email: string, password: string) => {
 
         // returning with set token in cookie
         response.headers.append(
-            'Set-cookie',
-            cookie.serialize('auth_token', token, {
+            'Set-Cookie',
+            serialize('auth_token', token, {
                 httpOnly: true,
                 sameSite: "strict",
                 maxAge: 60 * 60,
@@ -75,6 +77,7 @@ const login = async (email: string, password: string) => {
 const register = async (username: string, email: string, password: string) => {
     try {
         // Check if user already exists
+        console.log("comming")
         const existingUser = await prisma.user.findUnique({ where: { email } })
 
         if (existingUser) {
@@ -83,7 +86,7 @@ const register = async (username: string, email: string, password: string) => {
 
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10)
-
+        console.log("comming here")
         // Create a new user
         const user = await prisma.user.create({
             data: {
@@ -92,6 +95,8 @@ const register = async (username: string, email: string, password: string) => {
                 password: hashedPassword,
             },
         })
+
+        console.log("new user =>", user)
         const token = jwt.sign(
             { userId: user.id, email: user.email },
             "JWT_SECRET",
@@ -104,8 +109,8 @@ const register = async (username: string, email: string, password: string) => {
         })
         // Set the cookie with the JWT token
         response.headers.append(
-            'Set-cookie',
-            cookie.serialize('auth_token', token, {
+            'Set-Cookie',
+            serialize('auth_token', token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "strict",
