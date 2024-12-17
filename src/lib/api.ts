@@ -11,5 +11,4 @@ const api = axios.create({
 })
 
 // will add interceptor for request/response handling
-
 export default api
